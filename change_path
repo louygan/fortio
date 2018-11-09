@@ -1,1 +1,1 @@
-find .|grep go$ | xargs sed -i 's|fortio.org/fortio|github.com/louygan/fortio|g'
+find . | grep "\.go$" | xargs sed -i 's|fortio.org/fortio|github.com/louygan/fortio|g'

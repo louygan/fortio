@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package fnet // import "fortio.org/fortio/fnet"
+package fnet // import "github.com/louygan/fortio/fnet"
 
 import (
 	"fmt"
@@ -25,8 +25,8 @@ import (
 	"strings"
 	"sync"
 
-	"fortio.org/fortio/log"
-	"fortio.org/fortio/version"
+	"github.com/louygan/fortio/log"
+	"github.com/louygan/fortio/version"
 )
 
 const (

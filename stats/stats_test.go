@@ -26,7 +26,7 @@ import (
 	"strings"
 	"testing"
 
-	"fortio.org/fortio/log"
+	"github.com/louygan/fortio/log"
 )
 
 func TestCounter(t *testing.T) {

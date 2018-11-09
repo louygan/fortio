@@ -26,8 +26,8 @@ import (
 	"testing"
 	"time"
 
-	"fortio.org/fortio/fnet"
-	"fortio.org/fortio/log"
+	"github.com/louygan/fortio/fnet"
+	"github.com/louygan/fortio/log"
 )
 
 func init() {
@@ -1039,7 +1039,7 @@ func TestDefaultHeadersAndOptionsInit(t *testing.T) {
 	if code != 200 {
 		t.Errorf("Non ok code %d for debug default fetch1", code)
 	}
-	expected := []byte("User-Agent: fortio.org/fortio-")
+	expected := []byte("User-Agent: github.com/louygan/fortio-")
 	if !bytes.Contains(data, expected) {
 		t.Errorf("Didn't find default header echoed back in std client1 %s (expecting %s)", DebugSummary(data, 512), expected)
 	}

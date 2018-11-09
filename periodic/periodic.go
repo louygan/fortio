@@ -20,7 +20,7 @@
 // is also ../histogram to use the stats from the command line and ../echosrv
 // as a very light http server that can be used to test proxies etc like
 // the Istio components.
-package periodic // import "fortio.org/fortio/periodic"
+package periodic // import "github.com/louygan/fortio/periodic"
 
 import (
 	"fmt"
@@ -31,9 +31,9 @@ import (
 	"sync"
 	"time"
 
-	"fortio.org/fortio/log"
-	"fortio.org/fortio/stats"
-	"fortio.org/fortio/version"
+	"github.com/louygan/fortio/log"
+	"github.com/louygan/fortio/stats"
+	"github.com/louygan/fortio/version"
 )
 
 // DefaultRunnerOptions are the default values for options (do not mutate!).

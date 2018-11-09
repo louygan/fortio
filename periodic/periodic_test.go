@@ -21,7 +21,7 @@ import (
 	"testing"
 	"time"
 
-	"fortio.org/fortio/log"
+	"github.com/louygan/fortio/log"
 )
 
 type Noop struct{}

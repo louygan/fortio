@@ -22,9 +22,9 @@ import (
 	"io"
 	"os"
 
-	"fortio.org/fortio/bincommon"
-	"fortio.org/fortio/log"
-	"fortio.org/fortio/version"
+	"github.com/louygan/fortio/bincommon"
+	"github.com/louygan/fortio/log"
+	"github.com/louygan/fortio/version"
 )
 
 // Prints usage

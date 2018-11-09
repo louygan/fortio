@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package stats // import "fortio.org/fortio/stats"
+package stats // import "github.com/louygan/fortio/stats"
 
 import (
 	"bufio"
@@ -24,7 +24,7 @@ import (
 	"strconv"
 	"strings"
 
-	"fortio.org/fortio/log"
+	"github.com/louygan/fortio/log"
 )
 
 // Counter is a type whose instances record values

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package fhttp // import "fortio.org/fortio/fhttp"
+package fhttp // import "github.com/louygan/fortio/fhttp"
 
 import (
 	"bufio"
@@ -31,9 +31,9 @@ import (
 
 	"golang.org/x/net/http2"   //Louie GAN
 
-	"fortio.org/fortio/fnet"
-	"fortio.org/fortio/log"
-	"fortio.org/fortio/version"
+	"github.com/louygan/fortio/fnet"
+	"github.com/louygan/fortio/log"
+	"github.com/louygan/fortio/version"
 )
 
 // Fetcher is the Url content fetcher that the different client implements.
@@ -146,7 +146,7 @@ func (h *HTTPOptions) URLSchemeCheck() {
 	}
 }
 
-var userAgent = "fortio.org/fortio-" + version.Short()
+var userAgent = "github.com/louygan/fortio-" + version.Short()
 
 const (
 	retcodeOffset = len("HTTP/1.X ")

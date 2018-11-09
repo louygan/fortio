@@ -20,9 +20,9 @@ import (
 	"testing"
 	"time"
 
-	"fortio.org/fortio/fnet"
-	"fortio.org/fortio/log"
-	"fortio.org/fortio/periodic"
+	"github.com/louygan/fortio/fnet"
+	"github.com/louygan/fortio/log"
+	"github.com/louygan/fortio/periodic"
 
 	"google.golang.org/grpc/health/grpc_health_v1"
 )

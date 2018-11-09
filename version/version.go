@@ -13,12 +13,12 @@
 // limitations under the License.
 
 // Package version for fortio holds version information and build information.
-package version // import "fortio.org/fortio/version"
+package version // import "github.com/louygan/fortio/version"
 import (
 	"fmt"
 	"runtime"
 
-	"fortio.org/fortio/log"
+	"github.com/louygan/fortio/log"
 )
 
 const (

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package fhttp // import "fortio.org/fortio/fhttp"
+package fhttp // import "github.com/louygan/fortio/fhttp"
 
 import (
 	"bytes"
@@ -29,9 +29,9 @@ import (
 	// get /debug/pprof endpoints on a mux through SetupPPROF
 	"net/http/pprof"
 
-	"fortio.org/fortio/fnet"
-	"fortio.org/fortio/log"
-	"fortio.org/fortio/version"
+	"github.com/louygan/fortio/fnet"
+	"github.com/louygan/fortio/log"
+	"github.com/louygan/fortio/version"
 )
 
 // -- Echo Server --

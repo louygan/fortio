@@ -25,8 +25,8 @@ import (
 	"os"
 	"strings"
 
-	"fortio.org/fortio/fhttp"
-	"fortio.org/fortio/version"
+	"github.com/louygan/fortio/fhttp"
+	"github.com/louygan/fortio/version"
 )
 
 var (
