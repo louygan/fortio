@@ -355,6 +355,7 @@ func (c *Client) Fetch() (int, []byte, int) {
 // NewClient creates either a standard or fast client (depending on
 // the DisableFastClient flag)
 func NewClient(o *HTTPOptions) Fetcher {
+        //log.Infof("Fetcher")
 	o.Init(o.URL) // For completely new options
 	// For changes to options after init
 	o.URLSchemeCheck()
@@ -373,7 +374,12 @@ func NewStdClient(o *HTTPOptions) *Client {
 	if req == nil {
 		return nil
 	}
-	/*
+
+	var client Client
+
+	o.URLSchemeCheck()
+	if o.DisableFastClient {    //Louie GAN
+	
 	tr := http.Transport{
 		MaxIdleConns:        o.NumConnections,
 		MaxIdleConnsPerHost: o.NumConnections,
@@ -383,24 +389,13 @@ func NewStdClient(o *HTTPOptions) *Client {
 			Timeout: o.HTTPReqTimeOut,
 		}).Dial,
 		TLSHandshakeTimeout: o.HTTPReqTimeOut,
-		// 2018.11.9 Louie GAN, add support h2c
-		AllowHTTP:		true,
 	}
-	*/
-	tr := http2.Transport{
-            AllowHTTP: true,
-	    DisableCompression:  !o.Compression, 
-            DialTLS: func(network, addr string, cfg *tls.Config) (net.Conn, error) {
-                return net.Dial(network, addr)
-            },	    
-	}
-	/*
 	if o.Insecure && o.https {
 		log.LogVf("using insecure https")
 		tr.TLSClientConfig = &tls.Config{InsecureSkipVerify: true} // nolint: gas
+
 	}
-	*/
-	client := Client{
+	client = Client{
 		url: o.URL,
 		req: req,
 		client: &http.Client{
@@ -409,6 +404,28 @@ func NewStdClient(o *HTTPOptions) *Client {
 		},
 		//transport: &tr, //Louie GAN, remove it cause tr may be http2 format
 	}
+
+	}else{
+	
+	tr := http2.Transport{
+            AllowHTTP: true,
+	    DisableCompression:  !o.Compression, 
+            DialTLS: func(network, addr string, cfg *tls.Config) (net.Conn, error) {
+                return net.Dial(network, addr)
+            },	    
+	}
+	client = Client{
+		url: o.URL,
+		req: req,
+		client: &http.Client{
+			Timeout:   o.HTTPReqTimeOut,
+			Transport: &tr,
+		},
+		//transport: &tr, //Louie GAN, remove it cause tr may be http2 format
+	}
+
+	}
+	
 	if !o.FollowRedirects {
 		// Lets us see the raw response instead of auto following redirects.
 		client.client.CheckRedirect = func(req *http.Request, via []*http.Request) error {
