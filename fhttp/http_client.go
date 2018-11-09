@@ -29,6 +29,8 @@ import (
 	"strings"
 	"time"
 
+	"golang.org/x/net/http2"   //Louie GAN
+
 	"fortio.org/fortio/fnet"
 	"fortio.org/fortio/log"
 	"fortio.org/fortio/version"
@@ -359,7 +361,9 @@ func NewClient(o *HTTPOptions) Fetcher {
 	if o.DisableFastClient {
 		return NewStdClient(o)
 	}
-	return NewFastClient(o)
+	// Louie Gan, disable FastClient for h2c support
+	//return NewFastClient(o)
+	return NewStdClient(o)
 }
 
 // NewStdClient creates a client object that wraps the net/http standard client.
@@ -369,6 +373,7 @@ func NewStdClient(o *HTTPOptions) *Client {
 	if req == nil {
 		return nil
 	}
+	/*
 	tr := http.Transport{
 		MaxIdleConns:        o.NumConnections,
 		MaxIdleConnsPerHost: o.NumConnections,
@@ -378,11 +383,23 @@ func NewStdClient(o *HTTPOptions) *Client {
 			Timeout: o.HTTPReqTimeOut,
 		}).Dial,
 		TLSHandshakeTimeout: o.HTTPReqTimeOut,
+		// 2018.11.9 Louie GAN, add support h2c
+		AllowHTTP:		true,
 	}
+	*/
+	tr := http2.Transport{
+            AllowHTTP: true,
+	    DisableCompression:  !o.Compression, 
+            DialTLS: func(network, addr string, cfg *tls.Config) (net.Conn, error) {
+                return net.Dial(network, addr)
+            },	    
+	}
+	/*
 	if o.Insecure && o.https {
 		log.LogVf("using insecure https")
 		tr.TLSClientConfig = &tls.Config{InsecureSkipVerify: true} // nolint: gas
 	}
+	*/
 	client := Client{
 		url: o.URL,
 		req: req,
@@ -390,7 +407,7 @@ func NewStdClient(o *HTTPOptions) *Client {
 			Timeout:   o.HTTPReqTimeOut,
 			Transport: &tr,
 		},
-		transport: &tr,
+		//transport: &tr, //Louie GAN, remove it cause tr may be http2 format
 	}
 	if !o.FollowRedirects {
 		// Lets us see the raw response instead of auto following redirects.
